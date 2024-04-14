@@ -1,0 +1,23 @@
+.t_0 {
+    width: 23px;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    background-color: #f0f0f0;
+}
+
+.t_1 {
+    width: 23px;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    background-color: #99ffff;
+}
+
+.row {
+    display: flex;
+}
+
+.board {
+    border: 1px solid black;
+    margin: auto;
+    width: fit-content;
+}
