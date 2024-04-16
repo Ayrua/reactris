@@ -12,6 +12,48 @@
     background-color: #99ffff;
 }
 
+.t_2 {
+    width: 23px;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    background-color: #99ffff;
+}
+
+.t_3 {
+    width: 23px;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    background-color: #99ffff;
+}
+
+.t_4 {
+    width: 23px;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    background-color: #99ffff;
+}
+
+.t_5 {
+    width: 23px;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    background-color: #99ffff;
+}
+
+.t_6 {
+    width: 23px;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    background-color: #99ffff;
+}
+
+.t_7 {
+    width: 23px;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    background-color: #99ffff;
+}
+
 .row {
     display: flex;
 }
