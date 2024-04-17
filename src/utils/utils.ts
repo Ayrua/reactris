@@ -63,3 +63,35 @@ export const setShapeOnBoard = (idx: number, x: number, y: number, r: number, bo
         }
     }
 }
+
+export const randomPiece = () => {
+    return Math.floor(Math.random() * 7)
+}
+
+export const move = (piece: number[], board: number[][], key: string) => {
+    const [idx, x, y, r] = piece
+    // check keypress
+    if (key == 'a' && checkMove(idx, x - 1, y, r, board)) piece[1]--
+    if (key == 'd' && checkMove(idx, x + 1, y, r, board)) piece[1]++
+    if (key == 's' && checkMove(idx, x, y + 1, r, board)) piece[2] = y + 1
+    if (key == 'r' && checkMove(idx, x, y, r + 1, board)) piece[3] = r + 1 % 4
+}
+
+export const checkLines = (board: number[][]) => {
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[0].length; j++) {
+            if (board[i][j] == 0) break
+            if (i == board.length - 1 && j == board[0].length - 1 && shapeTypes.includes(board[i][j])) {
+                replaceLine(board, i)
+            }
+        }
+    }
+}
+
+export const replaceLine = (board: number[][], line: number) => {
+    console.log('asdasfasfasfasfasfaf')
+    for (let i = line; i > 0; i--) {
+        console.log('asdasfasf')
+        board[i] = board[i - 1]
+    }
+}
