@@ -18,6 +18,7 @@ export const checkMove = (idx: number, x: number, y: number, r: number, board: n
 
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
+            if (y + j < 0) continue
             const idxShape = rotate(i, j, r)
 
             // check if index is shape
@@ -45,7 +46,7 @@ export const drawBoard = (idx: number, x: number, y: number, r: number, board: n
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             const s = Shapes[idx][rotate(i, j, r)]
-            if (shapeTypes.includes(s)) {
+            if (shapeTypes.includes(s) && y + j >= 0) {
                 newBoard[y + j][x + i] = s
             }
         }
@@ -57,7 +58,7 @@ export const setShapeOnBoard = (idx: number, x: number, y: number, r: number, bo
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             const s = Shapes[idx][rotate(i, j, r)]
-            if (shapeTypes.includes(s)) {
+            if (shapeTypes.includes(s) && y + j >= 0) {
                 board[y + j][x + i] = s
             }
         }
@@ -73,7 +74,7 @@ export const move = (piece: number[], board: number[][], key: string) => {
     // check keypress
     if (key == 'a' && checkMove(idx, x - 1, y, r, board)) piece[1]--
     if (key == 'd' && checkMove(idx, x + 1, y, r, board)) piece[1]++
-    if (key == 's' && checkMove(idx, x, y + 1, r, board)) piece[2] = y + 1
+    // if (key == 's' && checkMove(idx, x, y + 1, r, board)) piece[2] = y + 1 // bugged
     if (key == 'r' && checkMove(idx, x, y, r + 1, board)) piece[3] = r + 1 % 4
 }
 
@@ -89,9 +90,22 @@ export const checkLines = (board: number[][]) => {
 }
 
 export const replaceLine = (board: number[][], line: number) => {
-    console.log('asdasfasfasfasfasfaf')
     for (let i = line; i > 0; i--) {
-        console.log('asdasfasf')
         board[i] = board[i - 1]
+    }
+}
+
+export const spawnPiece = (piece: number[], board: number[][]) => {
+    const [idx, x, y, r] = [randomPiece(), board[0].length / 2, -3, 0]
+    if (checkMove(idx, x, y, r, board)) {
+        // console.log('valid: spawning new shape')
+        piece[0] = idx
+        piece[1] = x
+        piece[2] = y
+        piece[3] = r
+        return false
+    } else {
+        // game over
+        return true
     }
 }
