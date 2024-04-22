@@ -74,19 +74,24 @@ export const move = (piece: number[], board: number[][], key: string) => {
     // check keypress
     if (key == 'a' && checkMove(idx, x - 1, y, r, board)) piece[1]--
     if (key == 'd' && checkMove(idx, x + 1, y, r, board)) piece[1]++
-    // if (key == 's' && checkMove(idx, x, y + 1, r, board)) piece[2] = y + 1 // bugged
+    if (key == 's' && checkMove(idx, x, y + 1, r, board)) piece[2] = y + 1
     if (key == 'r' && checkMove(idx, x, y, r + 1, board)) piece[3] = r + 1 % 4
 }
 
 export const checkLines = (board: number[][]) => {
+    let points = 0
+    let multiplier = 1
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[0].length; j++) {
             if (board[i][j] == 0) break
-            if (i == board.length - 1 && j == board[0].length - 1 && shapeTypes.includes(board[i][j])) {
+            if (j == board[0].length - 1 && shapeTypes.includes(board[i][j])) {
                 replaceLine(board, i)
+                multiplier += 0.5
+                points += 100
             }
         }
     }
+    return points * multiplier
 }
 
 export const replaceLine = (board: number[][], line: number) => {

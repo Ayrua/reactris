@@ -5,13 +5,22 @@ import { GameLoop } from "./utils/GameLoop";
 
 const App = () => {
   const board = new Array(20).fill(0).map(() => new Array(10).fill(0));
-  const [newBoard, setNewBoard] = useState(drawBoard(1, board[0].length / 2, 0, 0, board))
-  const piece = useRef([1, board[0].length / 2, -2, 0])
+  const piece = useRef([1, board[0].length / 2, -3, 0])
+  const [idx, x, y, r] = piece.current
+  const [newBoard, setNewBoard] = useState(drawBoard(idx, x, y, r, board))
+  const points = useRef(0)
   const gameOver = useRef(false)
-  const fps = 1000 / 15
+  const level = (points.current % 1000) + 3
+  const fps = 1000 / level
 
   useEffect(() => {
     document.addEventListener('keydown', keyChange, true)
+    setInterval(() => {
+      if (!gameOver.current) {
+        const [idx, x, y, r] = piece.current
+        setNewBoard(drawBoard(idx, x, y, r, board))
+      }
+    }, 1);
   }, [])
 
   const keyChange = (e: any) => {
@@ -22,8 +31,9 @@ const App = () => {
 
     const intervalID = setInterval(() => {
       if (!gameOver.current) {
-        gameOver.current = GameLoop(piece.current, board)
-        setNewBoard(drawBoard(piece.current[0], piece.current[1], piece.current[2], piece.current[3], board))
+        const [g, p] = GameLoop(piece.current, board, points.current)
+        gameOver.current = g
+        points.current = p
       }
     }, fps);
 

@@ -1,7 +1,7 @@
 import { checkLines, checkMove, setShapeOnBoard, spawnPiece } from "./utils"
 
 
-export const GameLoop = (piece: number[], board: number[][]) => {
+export const GameLoop = (piece: number[], board: number[][], points: number): [boolean, number] => {
     const [idx, x, y, r] = piece
     let gameOver = false
     // check if piece at bottom else move down
@@ -13,6 +13,6 @@ export const GameLoop = (piece: number[], board: number[][]) => {
     }
 
     // check for line then move
-    checkLines(board)
-    return gameOver
+    const p = checkLines(board) + points
+    return [gameOver, p]
 }
