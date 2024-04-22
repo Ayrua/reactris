@@ -10,16 +10,14 @@ const App = () => {
   const [newBoard, setNewBoard] = useState(drawBoard(idx, x, y, r, board))
   const points = useRef(0)
   const gameOver = useRef(false)
-  const level = (points.current % 1000) + 3
+  const level = (Math.floor(points.current / 300)) + 3
   const fps = 1000 / level
 
   useEffect(() => {
     document.addEventListener('keydown', keyChange, true)
     setInterval(() => {
-      if (!gameOver.current) {
-        const [idx, x, y, r] = piece.current
-        setNewBoard(drawBoard(idx, x, y, r, board))
-      }
+      const [idx, x, y, r] = piece.current
+      setNewBoard(drawBoard(idx, x, y, r, board))
     }, 1);
   }, [])
 
@@ -44,6 +42,8 @@ const App = () => {
   return (
     <div>
       <Board board={newBoard} />
+      <div className="infotext">points: {points.current} | level:{level - 2} </div>
+      <div className="infotext">{gameOver.current ? 'game over' : ''}</div>
     </div>
   )
 }
