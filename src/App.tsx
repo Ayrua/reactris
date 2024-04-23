@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Board from "./component/Board"
-import { checkMove, drawBoard, move } from "./utils/utils";
+import { drawBoard, move } from "./utils/utils";
 import { GameLoop } from "./utils/GameLoop";
 
 const App = () => {
