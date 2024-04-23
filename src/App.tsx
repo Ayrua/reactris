@@ -43,6 +43,7 @@ const App = () => {
     <div>
       <Board board={newBoard} />
       <div className="infotext">points: {points.current} | level:{level - 2} </div>
+      <div className="infotext">controls: wasd | arrowkeys | r</div>
       <div className="infotext">{gameOver.current ? 'game over' : ''}</div>
     </div>
   )

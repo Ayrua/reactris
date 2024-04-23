@@ -72,10 +72,10 @@ export const randomPiece = () => {
 export const move = (piece: number[], board: number[][], key: string) => {
     const [idx, x, y, r] = piece
     // check keypress
-    if (key == 'a' && checkMove(idx, x - 1, y, r, board)) piece[1]--
-    if (key == 'd' && checkMove(idx, x + 1, y, r, board)) piece[1]++
-    if (key == 's' && checkMove(idx, x, y + 1, r, board)) piece[2] = y + 1
-    if (key == 'r' && checkMove(idx, x, y, r + 1, board)) piece[3] = r + 1 % 4
+    if ((key == 'a' || key == 'ArrowLeft') && checkMove(idx, x - 1, y, r, board)) piece[1]--
+    if ((key == 'd' || key == 'ArrowRight') && checkMove(idx, x + 1, y, r, board)) piece[1]++
+    if ((key == 's' || key == 'ArrowDown') && checkMove(idx, x, y + 1, r, board)) piece[2] = y + 1
+    if ((key == 'r' || key == 'w' || key == 'ArrowUp') && checkMove(idx, x, y, r + 1, board)) piece[3] = r + 1 % 4
 }
 
 export const checkLines = (board: number[][]) => {
