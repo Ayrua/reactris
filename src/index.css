@@ -68,3 +68,9 @@
     margin: auto;
     width: fit-content;
 }
+
+.gameovertext {
+    margin: auto;
+    width: fit-content;
+    color: red;
+}

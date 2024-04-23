@@ -18,7 +18,7 @@ const Board = ({ board }: Props) => {
 
     return (
         <div className="board">
-            {board.map((row, rowId) => (
+            {board.slice(4).map((row, rowId) => (
                 <div className={'row'} key={rowId}>
                     {
                         row.map((cell, cellId) => (

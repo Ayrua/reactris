@@ -18,7 +18,6 @@ export const checkMove = (idx: number, x: number, y: number, r: number, board: n
 
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
-            if (y + j < 0) continue
             const idxShape = rotate(i, j, r)
 
             // check if index is shape
@@ -28,7 +27,7 @@ export const checkMove = (idx: number, x: number, y: number, r: number, board: n
                 // 2. check if out of bounds for height
                 if (y + j < 0 || y + j >= boardHeight) return false
                 // 3. check if position is taken
-                if (board[y + j][x + i] != 0) return false
+                if (board[y + j][x + i]) return false
             }
         }
     }
@@ -101,16 +100,21 @@ export const replaceLine = (board: number[][], line: number) => {
 }
 
 export const spawnPiece = (piece: number[], board: number[][]) => {
-    const [idx, x, y, r] = [randomPiece(), board[0].length / 2, -3, 0]
+    const [idx, x, y, r] = [randomPiece(), board[0].length / 2, 0, 0]
     if (checkMove(idx, x, y, r, board)) {
         // console.log('valid: spawning new shape')
         piece[0] = idx
         piece[1] = x
         piece[2] = y
         piece[3] = r
-        return false
-    } else {
-        // game over
-        return true
     }
+}
+
+export const gameOverCheck = (board: number[][]) => {
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < board[0].length; j++) {
+            if (board[i][j] != 0) return true
+        }
+    }
+    return false
 }
